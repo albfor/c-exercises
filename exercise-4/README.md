@@ -1,4 +1,4 @@
-# Exercise 3
+# Exercise 4
 
 Make a program to print a macro(NUMBER) whose value is an integer to the terminal.
 

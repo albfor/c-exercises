@@ -2,7 +2,7 @@
 
 1) Make the Hello World program.
 
-```code
+```c
 #include <stdio.h>
 
 int main(void)

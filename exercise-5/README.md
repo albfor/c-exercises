@@ -7,5 +7,4 @@ Size, min and max values of int, unsigned int, short int, unsigned short int, si
 Size, min and max values of float, double and long double
 Size of enum color { RED, GREEN, BLUE, YELLOW, WHITE, BLACK };
 
-## I managed to delete main.c instead of main when I was about to add->commit->push it. 
-So yeah... Feel free to send a copy once you complete it.
+**Windows users** seem to have a bug with the LDBL values.

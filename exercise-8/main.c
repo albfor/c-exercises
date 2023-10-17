@@ -1,7 +1,7 @@
 /**
- * This is just to confirm I am not completely full of shit 
- * in my calculations.
+ * This is just to verify my calculations
  */
+
 #include <stdio.h>
 #include <stdint.h>
 

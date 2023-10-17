@@ -33,6 +33,9 @@ int main(void)
     
     a += (b + k--) % 10;
     printf("D) %d\n", a);
+
+    d = (double)j * 100 / --k / 3;
+    printf("E) %d\n", d);
 }
 ```
 
@@ -167,3 +170,28 @@ a = 72;
 ```
 
 Thus, `printf("D) %d\n", a);` gives us the output `D) 72`
+
+**E)**
+```c
+d = (double)j * 100 / --k / 3;
+printf("E) %f\n", d);
+```
+
+The --k in combination with k-- from D) brings k down by a total of 2.
+So by simply replacing the variables with the values we get: 
+```
+d = (double)7 * 100 / 4 / 3;
+```
+
+And then simple arithmetics 
+
+```
+d = 58.333333...
+```
+
+Because we cast to a double we do not round down to closest integer.
+Floats default to rounding to 6 decimals when printing.
+As such we get the output `E) 58.333333`. **Side note**: Something like `0.66666666` will round to 
+`0.666667` not `0.6666666` in these situations.
+
+

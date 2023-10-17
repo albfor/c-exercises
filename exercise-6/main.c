@@ -13,7 +13,7 @@ int main(void)
         printf("ch is not a lowercase letter\n");
         return 1; 
     }
-    /*
+    /* convert ch to uppercase and print
      * (int)[a..z] -> [97..122]
      * [97..122] - 'a' (97) -> [0..26]
      * [0..26] + 'A' (65) -> [65..90]

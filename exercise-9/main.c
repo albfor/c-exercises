@@ -15,10 +15,10 @@ int main(void)
     
     while (play_again == 'y' || play_again == 'Y') {
         int secret_number = rand() % MAX;
-        
+
         for (int i = 0; i < ATTEMPTS; i++) {
             printf("Enter an integer between 0 and %d: ", MAX);
-            while (!scanf("%d%c", &guess, &term)) {
+            while (scanf("%d%c", &guess, &term) != 2 || term != '\n') {
                 while (getchar() != '\n'); // throw away the garbage input scanf failed to process.
                 printf("You are a dissapointment to your family.\n");
                 printf("Please, try entering an integer again...\n");

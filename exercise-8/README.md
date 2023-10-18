@@ -36,6 +36,10 @@ int main(void)
 
     d = (double)j * 100 / --k / 3;
     printf("E) %d\n", d);
+
+    x = -1;
+    y = (x < z) ? (k < j < 0) : (b >= a < i);
+    printf("F) %d\n", y);
 }
 ```
 
@@ -129,14 +133,15 @@ Let's begin with the inner most ().
 i && k
 ```
 
-Since `i = 0` This expression is going to result false a.k.a. 0.
-placing it back into the original expression we get 
+Since `i = 0` This expression is going to result false a.k.a. 0. placing it
+back into the original expression we get 
 ```
 x = (!(0) || !k) ? k + b : j + b;
 ```
 
-`!(0)` results in 1. Since we already have a 1 and we are using the logical or operator 
-we already know the operation is true. Thus: 
+`!(0)` results in 1. Since we already have a 1 and we are using the logical or
+operator we already know the operation is true. Thus: 
+
 ```
 x = k + b
 ```
@@ -161,8 +166,11 @@ a += (b + k--) % 10;
 printf("D) %d\n", a);
 ```
 
-From previous examples we know `b = 51`. `k--` does decrement k by one, but it does not take effect until the next use of `k`. So the value is still 6 here. Simple modular arithmetics gives us `57 % 10 = 7`.
-The ascii value of `'A'` is 65. As such 
+From previous examples we know `b = 51`. `k--` does decrement k by one, but it
+does not take effect until the next use of `k`. So the value is still 6 here.
+Simple modular arithmetics gives us `57 % 10 = 7`. The ascii value of `'A'` is
+65. As such 
+
 ```c
 a += 7;
 a = 65 + 7;
@@ -172,13 +180,15 @@ a = 72;
 Thus, `printf("D) %d\n", a);` gives us the output `D) 72`
 
 **E)**
+
 ```c
 d = (double)j * 100 / --k / 3;
 printf("E) %f\n", d);
 ```
 
-The --k in combination with k-- from D) brings k down by a total of 2.
-So by simply replacing the variables with the values we get: 
+The --k in combination with k-- from D) brings k down by a total of 2. So by
+simply replacing the variables with the values we get: 
+
 ```
 d = (double)7 * 100 / 4 / 3;
 ```
@@ -189,9 +199,27 @@ And then simple arithmetics
 d = 58.333333...
 ```
 
-Because we cast to a double we do not round down to closest integer.
-Floats default to rounding to 6 decimals when printing.
-As such we get the output `E) 58.333333`. **Side note**: Something like `0.66666666` will round to 
+Because we cast to a double we do not round down to closest integer. Floats
+default to rounding to 6 decimals when printing. As such we get the output 
+`E) 58.333333`. **Side note**: Something like `0.66666666` will round to 
 `0.666667` not `0.6666666` in these situations.
 
+**F)**
+
+```c
+x = -1;
+y = (x < z) ? (k < j < 0) : (b >= a < i);
+printf("F) %d\n", y);
+```
+
+`x < z` implicitly casts `x` to an `uint32_t`. As such `-1` turns into `2^32-1`
+and cannot possibly be smaller than `z`. So we can now convert the original
+expression to the following: 
+
+```c
+y = (b >= a < i);
+```
+
+Since `b` (51) is smaller than `a` (72) and 0 is not smaller than `i` (0) `y`
+is assigned the value 0. Thus, we end up with the output `F) 0`
 

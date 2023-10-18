@@ -35,4 +35,8 @@ int main(void)
 
     d = (double)j * 100 / --k / 3;
     printf("E) %f\n", d);
+
+    x = -1;
+    y = (x < z) ? (k < j < 0) : (b >= a < i);
+    printf("F) %d\n", y);
 }

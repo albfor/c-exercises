@@ -6,7 +6,7 @@
 #include <stdint.h>
 
 #define EXPRESSION (3 * j / k - 2)
-#define SET_VAIRABLES   \
+#define SET_VARIABLES   \
     {                   \
         i = 3;          \
         j = 2;          \
@@ -39,4 +39,23 @@ int main(void)
     x = -1;
     y = (x < z) ? (k < j < 0) : (b >= a < i);
     printf("F) %d\n", y);
+
+    d = x / z;
+    printf("G) %f\n", d);
+
+    i = 4;
+    j = -1;
+    k = 0;
+
+    x = i && j && k;
+    y = i || j && k;
+    printf("H) %d, %d\n", x, y);
+
+    x = i && j || k;
+    y = i || j || k;
+    printf("I) %d, %d\n", x, y);
+
+    SET_VARIABLES;
+    y = ++i || ++j && k++;
+    printf("J) %d, %d, %d, %d\n", i, j, k, y);
 }

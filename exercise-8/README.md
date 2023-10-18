@@ -7,7 +7,7 @@ Evaluate the following program. What is the output of the program?
 #include <stdint.h>
 
 #define EXPRESSION (3 * j / k - 2)
-#define SET_VAIRABLES   \
+#define SET_VARIABLES   \
     {                   \
         i = 3;          \
         j = 2;          \
@@ -40,6 +40,21 @@ int main(void)
     x = -1;
     y = (x < z) ? (k < j < 0) : (b >= a < i);
     printf("F) %d\n", y);
+
+    d = x / z;
+    printf("G) %f\n", d);
+
+    i = 4;
+    j = -1;
+    k = 0;
+
+    x = i && j && k;
+    y = i || j && k;
+    printf("H) %d, %d\n", x, y);
+
+    SET_VARIABLES;
+    y = ++i || ++j && k++;
+    printf("J) %d, %d, %d, %d\n", i, j, k, y);
 }
 ```
 
@@ -222,4 +237,57 @@ y = (b >= a < i);
 
 Since `b` (51) is smaller than `a` (72) and 0 is not smaller than `i` (0) `y`
 is assigned the value 0. Thus, we end up with the output `F) 0`
+
+**G)**
+
+```c
+d = x / z;
+printf("G) %f\n", d);
+```
+
+As in the previous expression `x / z` will implicitly cast `x` to uint32_t.
+So `x / z` results in `(2^32 - 1) / 32` which is equal to 134217727 after 
+rounding down to the closest integer. Then we store the integer as a double and
+print with a %f specifier. Thus, we get the output `G) 134217727.000000`
+
+**H)**
+
+```c
+i = 4;
+j = -1;
+k = 0;
+x = i && j && k;
+y = i || j && k;
+printf("H) %d, %d\n", x, y);
+```
+
+Because of `.. && k` we know `x` is going to be 0 without really needing to
+calculate it. As for y; && has precedence over ||. Therefore we can rewrite 
+`i || j && k` as `i || (j && k)`. Since `i` is true `y` is assigned 1. Thus, we
+get the output `H) 0, 1`
+
+**I)**
+
+```c
+x = i && j || k;
+y = i || j || k;
+printf("I) %d, %d\n", x, y);
+```
+
+Because of previously mentioned precedence we can rewrite `x` as `(i && j) || k`.
+replacing variables with values gives `(4 && -1) || 0` -> `1 || 0` -> 1. Since
+we know `i` is true `y` is going to be true. Thus, we get the output `I) 1, 1`
+
+**J)**
+
+```c
+SET_VARIABLES;
+y = ++i || ++j && k++;
+printf("J) %d, %d, %d, %d\n", i, j, k, y);
+```
+
+`SET_VARIABLES` sets `i` to 3 `j` to 2 and `k` to 0. `y = ++i || ++j && k++` ->
+`y = ++i || (++j && k++)` -> `4 || (++j && k++)` Since 4 is true assign `y` 1.
+`++j && k++` is never evaluated and therefore their values remain the same.
+Thus we get the output `J) 4, 2, 0, 1`.
 

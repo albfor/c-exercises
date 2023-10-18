@@ -58,4 +58,31 @@ int main(void)
     SET_VARIABLES;
     y = ++i || ++j && k++;
     printf("J) %d, %d, %d, %d\n", i, j, k, y);
+
+    SET_VARIABLES;
+    y = (123 && --i) ? k++ : ++k;
+    printf("K) %d, %d, %d, %d\n", i, j, k, y);
+
+    SET_VARIABLES;
+    y = ++i && ++j && k++;
+    printf("L) %d, %d, %d, %d\n", i, j, k, y);
+
+    i = 4;
+    j = --i;
+    k = i--;
+    printf("M) %d, %d, %d\n", i, j, k);
+
+    i = -1;
+    j = 1;
+
+    i && printf("N) Hello World!\n") && --j;
+
+    ++i && j && printf("O) Hello World!\n");
+
+    i || printf("P) Hello World!\n") || j++;
+
+    j-- || !printf("Q) Hello World!\n") || i++;
+
+    printf("R) %d, %d\n", i, j);
 }
+

@@ -55,6 +55,28 @@ int main(void)
     SET_VARIABLES;
     y = ++i || ++j && k++;
     printf("J) %d, %d, %d, %d\n", i, j, k, y);
+
+    SET_VARIABLES;
+    y = ++i && ++j && k++;
+    printf("L) %d, %d, %d, %d\n", i, j, k, y);
+
+    i = 4;
+    j = --i;
+    k = i--;
+    printf("M) %d, %d, %d\n", i, j, k);
+
+    i = -1;
+    j = 1;
+
+    i && printf("N) Hello World!\n") && --j;
+
+    ++i && j && printf("O) Hello World!\n");
+
+    i || printf("P) Hello World!\n") || j++;
+
+    j-- || !printf("Q) Hello World!\n") || i++;
+
+    printf("R) %d, %d\n", i, j);
 }
 ```
 
@@ -291,3 +313,93 @@ printf("J) %d, %d, %d, %d\n", i, j, k, y);
 `++j && k++` is never evaluated and therefore their values remain the same.
 Thus we get the output `J) 4, 2, 0, 1`.
 
+**K)**
+
+```c
+SET_VARIABLES;
+y = (123 && --i) ? k++ : ++k;
+printf("K) %d, %d, %d, %d\n", i, j, k, y);
+```
+
+We start of by setting the variables i, j & k again. Then we evaluate the
+expression `123 && --i` since 123 is true we have to evaluate `--i`. `true && 2`
+is `true`. Which leads to `y = k++`. This assigns `k` to `y` and then increases
+`k`. Meaning `y` is 0, `i` is 2, `j` is 2 and `k` is 1. Thus, we have the output
+`K) 2, 2, 1, 0`.
+
+**L)**
+
+```c
+SET_VARIABLES;
+y = ++i && ++j && k++;
+printf("L) %d, %d, %d, %d", i, j, k, y);
+```
+
+We start of by setting the variables i, j & k again. && operations should be
+evaluated from left to right. Since `i` and `j` are greater than 0 everything in
+the expression will be evaluated, but `k` will not increment until after the 
+expression. Resulting in `y` being assigned 0. Thus, we get the output
+`L) 4, 3, 1, 0`
+
+**M)**
+
+```c
+i = 4;
+j = --i;
+k = i--;
+printf("M) %d, %d, %d\n", i, j, k);
+```
+
+The `j` expression decrements `i` before assigning it to `y`. The `k` expression does it
+after assigning `i` to `k`. Giving us the outputs `M) 2, 3, 3`.
+
+**N)**
+
+```c
+i = -1;
+j = 1;
+
+i && printf("N) Hello World!\n") && --j;
+```
+
+Since `i` is not eqaul to 0 we have to evaluate the next expression. `printf()`
+returns the number of characters printed, which in this case is 16. This also
+prints `N) Hello World!` to the terminal before it proceeds to decrement j.
+
+
+**O)**
+
+```c
+++i && j && printf("O) Hello World!\n");
+```
+
+This increments `i` giving us 0 and as such nothing else is evaluated in the
+expression and nothing is printed.
+
+**P)**
+
+```c
+i || printf("P) Hello World!\n") || j++;
+```
+
+Since `i` is false we have to evaluate the next part which prints 
+`P) Hello World!` and evaluates to true. Thus, we are not incrementing j.
+
+**Q)**
+
+```c
+j-- || !printf("Q) Hello World!\n") || i++;
+```
+
+We start off by evaluating `j` before decrementing it. Since it is 0 we have to
+continue evaluating the expression. `!printf()` with a not empty string should
+evaluate to 0 and print the string to the terminal, in this case 
+`Q) Hello World!`. And finally, it will increment i.
+
+**R)**
+
+```c
+printf("R) %d, %d\n", i, j);
+```
+
+Simply going to print `R) 1, -1`

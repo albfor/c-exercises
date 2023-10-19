@@ -44,16 +44,16 @@ int main(void)
  */
 void make_guess(unsigned short *guess) {
     char term;
-    printf("Enter guess [0..%d]: ", MAX);
+    printf("Enter guess [0..%d]: ", MAX - 1);
     while (scanf("%hu%c", guess, &term) != 2 || term != '\n') {
         while (getchar() != '\n'); // Throw away the garbage input scanf failed to process.
         printf("You are a dissapointment to your family.\n");
         printf("Please, try again...\n\n");
-        printf("Enter guess [0..%d]: ", MAX);
+        printf("Enter guess [0..%d]: ", MAX - 1);
     }
 
     if (*guess >= MAX) {
-        printf("It's not that hard to pick a number in the range 0..%d\n", MAX-1);
+        printf("It's not that hard to pick a number in the range 0..%d\n", MAX - 1);
         make_guess(guess);
     }
 }

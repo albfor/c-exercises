@@ -1,0 +1,5 @@
+# Exercise 13
+
+Make a program to print all the numbers in the range of 0 and 1000 whose last digit is 7.
+
+E.g. 7, 17, 27,  37, and etc.

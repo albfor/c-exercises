@@ -7,7 +7,7 @@ int main(void)
     char prev = ' ';        // previous character, set to space for caps to work
 
     /**
-     * while current character is not a new line
+     * while current character as lowercase letter is not a new line
      *  if curr is a letter 
      *      if prev was a space
      *          convert curr to uppercase 

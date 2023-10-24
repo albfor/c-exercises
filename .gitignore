@@ -1,0 +1,5 @@
+week*/exercise*/*
+!*.c
+!*.md
+!*.sh
+

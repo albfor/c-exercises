@@ -1,26 +1,36 @@
 #include <stdio.h>
 #include <ctype.h>
-#include <stdbool.h>
 
 int main(void)
 {
-    bool upper = true;
     printf("Enter your full name: ");
-    char c = getchar();
-    char prev = c;
-    while (c != '\n') {
-        if (isalpha(c)) {
-            if (upper) {
-                c = toupper(c);
-                upper = false;
+    char curr = getchar();  // current character
+    char prev = ' ';        // previous character, set to space for caps to work
+
+    /**
+     * while current character is not a new line
+     *  if curr is a letter 
+     *      if prev was a space
+     *          convert curr to uppercase 
+     *      print curr
+     *      set prev to curr
+     *  else if curr is space and prev wasn't space
+     *      print space
+     *      set prev to curr
+     *  set curr to lowercase from inputbuffer
+     */
+    while (curr != '\n') {
+        if (isalpha(curr)) {
+            if (isspace(prev)) {
+                curr = toupper(curr);
             }
-            putchar(c);
-        } else if (isspace(c) && !isspace(prev)) {
-            upper = true;
-            putchar(c);
+            putchar(curr);
+            prev = curr;
+        } else if (isspace(curr) && !isspace(prev)) {
+            putchar(curr);
+            prev = curr;
         }
-        prev = c;
-        c = tolower(getchar());
+        curr = tolower(getchar());
 
     }
 

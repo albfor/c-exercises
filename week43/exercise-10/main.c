@@ -9,7 +9,11 @@ int main(void)
 {
     uint8_t input;
     input = read_input();
-    printf("%d\n", input);
+
+    for (int i = 7; i >= 0; i--) {
+        printf("%d", (input & (1 << i)) > 0);
+    }
+
     return 0;
 }
 

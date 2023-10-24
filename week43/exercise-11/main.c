@@ -3,8 +3,7 @@
 
 int main(void)
 {
-    printf("Enter your full name: ");
-    char curr = getchar();  // current character
+    char curr;              // current character
     char prev = ' ';        // previous character, set to space for caps to work
 
     /**
@@ -19,7 +18,8 @@ int main(void)
      *      set prev to curr
      *  set curr to lowercase from inputbuffer
      */
-    while (curr != '\n') {
+    printf("Enter your full name: ");
+    while ((curr = tolower(getchar())) != '\n') {
         if (isalpha(curr)) {
             if (isspace(prev)) {
                 curr = toupper(curr);
@@ -30,7 +30,6 @@ int main(void)
             putchar(curr);
             prev = curr;
         }
-        curr = tolower(getchar());
 
     }
 

@@ -2,26 +2,31 @@
 #include <stdbool.h>
 
 int read_input() {
-    int a;
+    int number;
     char term;
     printf("Enter positive integer [2..10000]: ");
-    while (scanf("%u%c", &a, &term) != 2 || term != '\n') {
+    while (scanf("%u%c", &number, &term) != 2 || term != '\n') {
         while (getchar() != '\n'); // Throw away the garbage input scanf failed to process.
     }
 
-    if (a < 2 || a > 10000) {
+    if (number < 2 || number > 10000) {
         printf("Positive integer [2..10000]\n");
         return read_input();
     }
-    return a;
+    return number;
 }
 
 int main(void)
 {
     bool isprime = true;
     int number = read_input();
-    for (int i = 2; i < number; i++) {
-        if (number % i == 0){
+    if (number % 2 == 0) {
+            printf("divisible by %d\n", 2);
+            isprime = false;
+    }
+    int gpd = number / 3; // greatest possible denominator not spotted by % 2
+    for (int i = 3; i < gpd; i += 2) {
+        if (number % i == 0) {
             printf("divisible by %d\n", i);
             isprime = false;
         }

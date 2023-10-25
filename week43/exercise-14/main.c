@@ -20,7 +20,7 @@ int main(void)
 {
     bool isprime = true;
     int number = read_input();
-    if (number % 2 == 0) {
+    if (number % 2 == 0 && number != 2) {
             printf("divisible by %d\n", 2);
             isprime = false;
     }

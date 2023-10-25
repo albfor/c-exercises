@@ -29,6 +29,7 @@ int main(void)
         if (number % i == 0) {
             printf("divisible by %d\n", i);
             isprime = false;
+            break;
         }
     }
 

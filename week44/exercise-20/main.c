@@ -12,10 +12,49 @@ bool read_char(char ch);
 int main(void)
 {
     printf("Enter date (YYYY-MM-DD HH:mm:ss): ");
-    if (read_date())
-        printf("Aye!\n");
-    else 
-        printf("Boo!\n");
+    if (read_date()) {
+        printf("Aye! Winners gets ice cream.\n");
+        printf("\n");
+        printf("            .oo.\n");
+        printf("          oGGGGGGo\n");
+        printf("         GGGGGGGGGG\n");
+        printf("  .mMMMMMMGGGGGGEEEE=\n");
+        printf(" MMMMMMMMMMMGGEEEEEEEE\n");
+        printf("MMMMMMMMMMMNICKEEEEEEEE\n");
+        printf("MMMMMMMMMMMMMEEEEEEEEEE\n");
+        printf("!MMMMMMMMMMMOOEEEEEEEE\n");
+        printf(" MMM!MMMMMMOOOOOOE!=\n");
+        printf("  MM!!!!!!!!!!!!!!!\n");
+        printf("   MM!!!!!!!!!!!!!'\n");
+        printf("   !M!!!!!!!!!!!!!\n");
+        printf("    MM!!!!!!!!!!!'\n");
+        printf("    MM!!!!!!!!!!!\n");
+        printf("    ! `!!!!!!!!!'\n");
+        printf("    .  !!!!!!!!!\n");
+        printf("       `!!!!!!!'\n");
+        printf("        !!!!!!!\n");
+        printf("        `!!!!!'\n");
+        printf("         !!!!!\n");
+        printf("         `!!!'\n");
+        printf("          !!!\n");
+        printf("          `!'\n");
+        printf("           !\n");
+    }
+    else {
+        printf("Boo! Failures get zapped.\n");
+        printf("\n");
+        printf("o\n");
+        printf("\\_/\\o\n");
+        printf("( Oo)                    \\|/\n");
+        printf("(_=-)  .===O-  ~~Z~A~P~~ -O-\n");
+        printf("/   \\_/U'                /|\\\n");
+        printf("||  |_/\n");
+        printf("\\\\  |\n");
+        printf("{K ||\n");
+        printf("| PP\n");
+        printf("| ||\n");
+        printf("(__\\\\\n");
+    }
 
     return 0;
 }
@@ -25,33 +64,27 @@ int main(void)
  * where d is replaced with a digit
  */
 bool read_date() {
-    // read year
-    if (!read_digits(4))
+    if (!read_digits(4))        // year
         return false;
     if (!read_char('-'))
         return false;
-    // read month
-    if (!read_digits(2))
+    if (!read_digits(2))        // month
         return false;
     if (!read_char('-'))
         return false;
-    // read day
-    if (!read_digits(2))
+    if (!read_digits(2))        // day
         return false;
     if (!isspace(getchar()))
         return false;
-    // read hour
-    if (!read_digits(2))
+    if (!read_digits(2))        // hour
         return false;
     if (!read_char(':'))
         return false;
-    // read min
-    if (!read_digits(2))
+    if (!read_digits(2))        // minute
         return false;
     if (!read_char(':'))
         return false;
-    // read sec
-    if (!read_digits(2))
+    if (!read_digits(2))        // second
         return false;
     return true;
 }

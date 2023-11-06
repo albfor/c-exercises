@@ -3,6 +3,7 @@
 
 bool valid_date(int year, int month, int day);
 bool valid_time(int hour, int minute, int second);
+bool is_leap_year(int year);
 
 enum MONTHS {
     JANUARY = 1, 
@@ -32,6 +33,10 @@ int main(void)
     return 0;
 }
 
+/**
+ * @return true if @year is in range of 0..9999, @month is in range 1..12 and
+ *                 @day is a valid day for the given year and month
+ */
 bool valid_date(int year, int month, int day) 
 {
     if (year > 9999) {
@@ -65,30 +70,10 @@ bool valid_date(int year, int month, int day)
         break;
     // february
     case FEBRUARY:
-        if (year % 4 == 0) {
-            if (year % 100 == 0) {
-                if (year % 400 == 0) {
-                    if (day > 29) {
-                        printf("invalid day 00.29\n");
-                        return false;
-                    }
-                }
-                else {
-                    if (day > 28) {
-                        printf("invalid day 00..28\n");
-                        return false;
-                    }
-                }
-            }
-            else if (day > 29) {
-                printf("invalid day 00..29\n");
-                return false;
-            }
-        }
-        else if (day > 28) {
-            printf("invalid day 00..28\n");
+        if (day > 29 || (day == 29 && !is_leap_year(year))) {
+            printf("day can only be greater than 28 if leap year.\n");
             return false;
-        }
+        } 
         break;
     default:
         printf("invalid month 01..12\n");
@@ -98,6 +83,10 @@ bool valid_date(int year, int month, int day)
     return true;
 }
 
+/**
+ * @return true if @hour is in the range 0..23, @minute is in the range 0..59
+ *                 and @second in the range 0..59.
+ */
 bool valid_time(int hour, int minute, int second)
 {
     if (hour > 23) {
@@ -110,6 +99,22 @@ bool valid_time(int hour, int minute, int second)
     }
     if (second > 59) {
         printf("invalid second 00..59\n");
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * @return true if @year is a leap year
+ */
+bool is_leap_year(int year)
+{
+    if (year % 4 != 0) {
+        return false;
+    }
+
+    if (year % 100 == 0 && year % 400 != 0) {
         return false;
     }
 

@@ -1,13 +1,15 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
 
 void fill_arr(int *arr, int len);
 void print_arr(int *arr, int len);
+bool find(int value, int *arr, int len);
 
 int main(void)
 {
-    int len = 10;
+    int len = 50;
     int arr[len];
     srand(time(NULL));
 
@@ -20,8 +22,19 @@ int main(void)
 void fill_arr(int *arr, int len)
 {
     for (int i = 0; i < len; i++) {
-        arr[i] = (rand() % 99) + 1;
+        int temp;
+        while(find(temp = (rand() % 99) + 1, arr, i)); 
+        arr[i] = temp;
     }
+}
+
+bool find(int value, int *arr, int len)
+{
+    for (int i = 0; i < len; i++) {
+        if (arr[i] == value)
+            return true;
+    }
+    return false;
 }
 
 void print_arr(int *arr, int len)

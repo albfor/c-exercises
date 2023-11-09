@@ -9,7 +9,7 @@ bool find(int value, int *arr, int len);
 
 int main(void)
 {
-    int len = 50;
+    int len = 10;
     int arr[len];
     srand(time(NULL));
 
@@ -22,9 +22,7 @@ int main(void)
 void fill_arr(int *arr, int len)
 {
     for (int i = 0; i < len; i++) {
-        int temp;
-        while(find(temp = (rand() % 99) + 1, arr, i)); 
-        arr[i] = temp;
+        while(find(arr[i] = (rand() % 99) + 1, arr, i)); 
     }
 }
 

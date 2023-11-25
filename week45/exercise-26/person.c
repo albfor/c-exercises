@@ -19,7 +19,7 @@ int main(void)
 
 person_t *create_person()
 {
-    person_t *new_person = malloc(sizeof(person_t));
+    person_t *new_person;
     printf("Enter person (age, height, name): ");
     scanf("%d, %f, %s", &new_person->age, &new_person->height, new_person->name);
 

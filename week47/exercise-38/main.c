@@ -63,24 +63,30 @@ user_t *readUsers() {
 }
 
 void updateUserName(uint32_t id, char name[8]) {
-    FILE *myfile = fopen("users.dat", "rb");
-    if (myfile == NULL) {
+    FILE *myfile = fopen("users.dat", "rb+");
+    user_t *usr;
+    uint32_t offset_to_user = (id - 1) * sizeof(user_t);
+    if (myfile == NULL) 
+    {
         fprintf(stderr, "cannot open file: users.dat");
         exit(1);
     }
-    user_t users[USERS_SIZE];
-    fread(users, sizeof(user_t), USERS_SIZE, myfile);
-    fclose(myfile);
-
-    for (int i = 0; i < USERS_SIZE; i++) {
-        if (users[i].id == id) {
-            strcpy(users[i].name, name);
-            printf("name updated\n");
-            break;
-        }
+    if (fseek(myfile, offset_to_user, SEEK_SET) != 0 ||
+        fread(usr, sizeof(user_t), 1, myfile) != 1) 
+    {
+        fprintf(stderr, "cannot read user by id.\n");
+        fclose(myfile);
+        exit(1);
     }
-
-    writeUsers(users);
+    strcpy(usr->name, name);
+    if (fseek(myfile, offset_to_user, SEEK_SET) != 0 ||
+        fwrite(usr, sizeof(user_t), 1, myfile) != 1) 
+    {
+        fprintf(stderr, "cannot update usr");
+        fclose(myfile);
+        exit(1);
+    }
+    fclose(myfile);
 }
 
 int main(void)

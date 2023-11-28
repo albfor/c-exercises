@@ -28,13 +28,29 @@ unsigned int lcm(unsigned int a, unsigned int b)
     return multiple;
 }
 
+/// Compare char at a and char at b alphabetically.
+///
+/// Example: a = 'a', b = 'b' -> (>1)
+/// Example: a = 'b', b = 'A' -> (<0)
+/// Example: a = 'a', b = 'A' -> (<0)
+/// Example: a = 'a', b = 'a' -> (0)
+///
+/// @param a Pointer to a char.
+/// @param b Pointer to a char.
+/// @return >1 if a comes before b.
+///         0  if a is equal to b.
+///         <0 if a comes after b.
 static int compare(const void * a, const void * b)
 {
-    int res = tolower(*(char*) a) - tolower(*(char*) b); 
+    // convert a & b to chars
+    char chA = *(char *) a;
+    char chB = *(char *) b;
+
+    int res = tolower(chA) - tolower(chB); 
     if (res == 0) {
-        return *(char*)a - *(char*)b;
+        return chA - chB;
     }
-    return tolower(*(char*) a) - tolower(*(char*) b);
+    return res;
 }
 
 void sort_string(char * str)

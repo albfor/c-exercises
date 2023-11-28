@@ -1,6 +1,7 @@
 week*/exercise*/*
 .vscode/
 !*.c
+!*.h
 !*.md
 !*.sh
 

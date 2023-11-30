@@ -8,7 +8,8 @@ int main(void)
     assert(lcm(4, 6) == 12);
     char str[] = "jsaNSHosAlPWnSJq";
     sort_string(str);
-    assert(!strcmp(str, "AaHJjlNnoPqSSssW"));
+    // strcmp returns 0 if equal
+    assert(0 == strcmp(str, "AaHJjlNnoPqSSssW"));
 
     printf("All tests passed\n");
 

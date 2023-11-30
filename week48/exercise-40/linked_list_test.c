@@ -16,6 +16,7 @@ int main(void)
 
     for (int i = 0; i < n; i++) {
         assert(list_insert(list, arr[i]));
+        printf("Inserted %d\n", arr[i]);
     }
     for (int i = 0; i < n; i++) {
         assert(arr[i] == list_get(list, i));

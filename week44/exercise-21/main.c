@@ -4,10 +4,11 @@
 #include <time.h>
 
 #define SIZE 10
+#define RANGE 100
 
 void swap(int *a, int *b);
-void bubble_sort(int arr[]);
-void print_arr(int arr[]);
+void bubble_sort(int *arr, int len);
+void print_arr(int *arr, int len);
 
 int main(void)
 {
@@ -17,14 +18,14 @@ int main(void)
 
     int *n = arr + SIZE;                    // first address after arr
     for (int *ptr = arr; ptr < n; ptr++) {
-        *ptr = rand() % 100;                // read random values into arr
+        *ptr = rand() % RANGE;                // read random values into arr, exclusive range
     }
 
     printf("unsorted array: ");
-    print_arr(arr);                         // print unsorted arr
-    bubble_sort(arr);                       // sort
+    print_arr(arr, SIZE);                         // print unsorted arr
+    bubble_sort(arr, SIZE);                       // sort
     printf("\n  sorted array: ");
-    print_arr(arr);                         // print sorted arr
+    print_arr(arr, SIZE);                         // print sorted arr
 
     return 0;
 }
@@ -40,15 +41,15 @@ void swap(int *a, int *b)
 }
 
 /**
- * Sort arr in ascending order using bubble sort
+ * Sort @arr in ascending order using bubble sort
  * using pointers because of reasons.
  */
-void bubble_sort(int arr[])
+void bubble_sort(int *arr, int len)
 {
     bool swapped;
-    for (int i = 0; i < SIZE - 1; i++) {
+    for (int i = 0; i < len - 1; i++) {
         swapped = false;
-        int *n = arr + SIZE - 1 - i;
+        int *n = arr + len - 1 - i;
         for (int *ptr = arr; ptr < n; ptr++) {
             if (*ptr > *(ptr + 1)) {
                 swap(ptr, ptr + 1);
@@ -61,11 +62,11 @@ void bubble_sort(int arr[])
 }
 
 /**
- * Print arr to stdout
+ * Print @arr to stdout
  */
-void print_arr(int arr[])
+void print_arr(int *arr, int len)
 {
-    int *n = arr + SIZE;
+    int *n = arr + len;
     for (int *ptr = arr; ptr < n; ptr++) {
         printf("%2d ", *ptr);
     }

@@ -11,7 +11,7 @@ typedef struct list list_t; // linked list
 /// Initializes a new linked list and sets its head to NULL and size to 0.
 ///
 /// @return pointer to a new linked list.
-list_t *create_list(void);
+list_t *list_create(void);
 
 /// @brief Insert item into list.
 ///
@@ -65,4 +65,7 @@ int list_size(list_t *list);
 /// @param list A linked list.
 /// @return Returns true if deletion was successful, false if list is NULL.
 bool list_destroy(list_t *list);
+
+/// @brief print all nodes in the list.
+void list_print(list_t *list);
 #endif // !LINKED_LIST_H

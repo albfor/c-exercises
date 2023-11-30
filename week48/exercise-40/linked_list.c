@@ -73,20 +73,18 @@ bool list_remove(list_t *list, int data) {
     if (current->data == data) {
         list->head = current->next;
         free(current);
-        return true;
     } else {
         while (current->next != NULL) {
             if (current->next->data == data) {
                 node_t *to_be_removed = current->next;
                 current->next = current->next->next;
                 free(to_be_removed);
-                list->size--;
                 break;
             }
             current = current->next;
         }
     }
-
+    list->size--;
     return true;
 }
 
@@ -132,4 +130,19 @@ bool list_destroy(list_t *list) {
     }
     free(list);
     return true;
+}
+
+void list_print(list_t *list) {
+    if (list == NULL)
+        return;
+    node_t *current = list->head;
+    printf("List size: %lu ", list->size);
+    printf("{\n");
+    size_t counter = 0;
+    while (current != NULL) {
+        printf("  list[%lu], value: %d, next: %p\n", counter, current->data, current->next);
+        counter++;
+        current = current->next;
+    }
+    printf("}\n");
 }

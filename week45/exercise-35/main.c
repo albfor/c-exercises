@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "prime.h"
+#include "../../modules/prime.h"
 
 int main(int argc, char *argv[])
 {

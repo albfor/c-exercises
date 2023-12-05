@@ -1,9 +1,6 @@
 #include <stdbool.h>
 #include "prime.h"
 
-/**
- * returns true if @n is prime
- */
 bool isprime(unsigned int number)
 {
     if (number == 2) 
